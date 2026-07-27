@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 翻译</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Large title bar -->
+      <header class="title-bar">
+        <h1>翻译</h1>
+      </header>
+
+      <main class="content">
+        <!-- Status pill -->
+        <div id="statusPill" class="status-pill">
+          <span id="statusDot" class="status-dot"></span>
+          <span id="statusText" class="status-text">未启用</span>
+        </div>
+
+        <!-- Manual translate + refresh buttons -->
+        <div class="page-btn-row">
+          <button id="translatePageBtn" class="page-btn">
+            <span class="page-btn-icon" id="pageBtnIcon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 5h7M9 3v2c0 4.418-2.239 8-5 8" />
+                <path d="M5 9c0 2.144 2.953 3.908 6.7 4" />
+                <path d="M12 20l4-9 4 9M14.5 16h3" />
+              </svg>
+            </span>
+            <span class="page-btn-label" id="pageBtnLabel">翻译本页</span>
+          </button>
+          <button id="refreshBtn" class="icon-page-btn" title="重新翻译" aria-label="重新翻译">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10" />
+              <polyline points="1 20 1 14 7 14" />
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Grouped card: toggles -->
+        <section class="card-group">
+          <div class="row">
+            <div class="row-label">
+              <span class="row-title">自动翻译</span>
+              <span class="row-subtitle">检测到英文网页时自动翻译为简体中文</span>
+            </div>
+            <div id="translateToggle" class="toggle" role="switch" aria-checked="false" tabindex="0"></div>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <div class="row-label">
+              <span class="row-title">悬停查看原文</span>
+              <span class="row-subtitle">鼠标悬停在译文上时显示原文</span>
+            </div>
+            <div id="hoverToggle" class="toggle" role="switch" aria-checked="true" tabindex="0"></div>
+          </div>
+        </section>
+
+        <!-- Grouped card: settings link -->
+        <section class="card-group">
+          <a id="settingsLink" class="row row-link" href="#">
+            <div class="row-label">
+              <span class="row-title">设置</span>
+            </div>
+            <div class="row-accessory">
+              <span id="apiKeyStatus" class="accessory-text">未配置</span>
+              <span class="chevron"></span>
+            </div>
+          </a>
+        </section>
+
+      </main>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

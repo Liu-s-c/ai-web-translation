@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>翻译设置</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- iOS-style navigation bar -->
+      <header class="nav-bar">
+        <div class="nav-inner">
+          <button id="backBtn" class="nav-back" aria-label="返回">
+            <span class="back-chevron"></span>
+            <span>翻译</span>
+          </button>
+          <h1 class="nav-title">设置</h1>
+          <div class="nav-right"></div>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- Section: API -->
+        <p class="section-header">API 配置</p>
+        <section class="card-group">
+          <div class="row row-stacked">
+            <div class="row-label">
+              <span class="row-title">DeepSeek API Key</span>
+              <span class="row-subtitle">在 platform.deepseek.com 获取</span>
+            </div>
+            <div class="input-row">
+              <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" spellcheck="false" />
+              <button id="toggleKey" class="icon-btn" type="button" aria-label="显示/隐藏">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <a class="row row-link" href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">
+            <div class="row-label">
+              <span class="row-title link">获取 API Key</span>
+            </div>
+            <div class="row-accessory">
+              <span class="chevron"></span>
+            </div>
+          </a>
+        </section>
+
+        <!-- Section: Glossary -->
+        <p class="section-header">术语表</p>
+        <p class="section-desc">自定义专有名词的译法，确保翻译一致。</p>
+        <section class="card-group" id="glossaryCard">
+          <div id="glossaryList" class="glossary-list">
+            <!-- Filled by JS -->
+          </div>
+          <div class="separator" id="glossaryAddSeparator"></div>
+          <div class="row row-stacked glossary-add-row">
+            <div class="input-row glossary-input-row">
+              <input id="glossaryFrom" type="text" placeholder="原文术语" />
+              <span class="arrow">→</span>
+              <input id="glossaryTo" type="text" placeholder="译文" />
+              <button id="addGlossary" class="icon-btn primary" type="button" aria-label="添加">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Whitelist -->
+        <p class="section-header">白名单</p>
+        <p class="section-desc">在指定网站及其子域名上不自动翻译。手动翻译仍可用。</p>
+        <section class="card-group" id="whitelistCard">
+          <div id="whitelistList" class="glossary-list">
+            <!-- Filled by JS -->
+          </div>
+          <div class="separator" id="whitelistAddSeparator"></div>
+          <div class="row row-stacked glossary-add-row">
+            <div class="input-row glossary-input-row">
+              <input id="whitelistInput" type="text" placeholder="example.com" />
+              <button id="addWhitelist" class="icon-btn primary" type="button" aria-label="添加">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Cache -->
+        <p class="section-header">缓存</p>
+        <section class="card-group">
+          <div class="row">
+            <div class="row-label">
+              <span class="row-title">已缓存翻译</span>
+              <span id="cacheStats" class="row-subtitle">0 条</span>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <a id="clearCacheBtn" class="row row-link destructive" href="#">
+            <div class="row-label">
+              <span class="row-title link destructive">清空缓存</span>
+            </div>
+          </a>
+        </section>
+
+        <!-- Section: About -->
+        <p class="section-header">关于</p>
+        <section class="card-group">
+          <div class="row">
+            <div class="row-label">
+              <span class="row-title">模型</span>
+            </div>
+            <div class="row-accessory">
+              <span class="accessory-text">DeepSeek V4 Flash</span>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <div class="row-label">
+              <span class="row-title">目标语言</span>
+            </div>
+            <div class="row-accessory">
+              <span class="accessory-text">简体中文</span>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <div class="row-label">
+              <span class="row-title">版本</span>
+            </div>
+            <div class="row-accessory">
+              <span class="accessory-text">1.1.0</span>
+            </div>
+          </div>
+        </section>
+
+        <p class="footer-hint">AI 网页翻译 · 由 DeepSeek V4 Flash 驱动</p>
+      </main>
+    </div>
+
+    <!-- iOS-style toast -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="options.js"></script>
+  </body>
+</html>

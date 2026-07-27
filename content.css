@@ -1,0 +1,209 @@
+/* content.css - Styles injected by AI Web Translator into web pages.
+   iOS 26 light-mode aesthetic for the badge and tooltip.
+   All classes are prefixed with `ait-` to avoid clashing with site CSS. */
+
+.ait-translated {
+  transition: background-color 0.15s ease;
+}
+
+.ait-translated:hover {
+  background-color: rgba(0, 122, 255, 0.08) !important;
+  cursor: help;
+}
+
+/* ---------- Circular progress badge (iOS Liquid Glass) - compact, bottom-right ---------- */
+.ait-badge {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 2147483647 !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  border: 0.5px solid rgba(0, 0, 0, 0.08) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: ait-badge-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+.ait-badge-hiding {
+  opacity: 0 !important;
+  transform: scale(0.8) !important;
+}
+
+/* SVG progress ring */
+.ait-badge-ring {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+  transform: rotate(-90deg) !important; /* start from top */
+}
+
+.ait-badge-track {
+  fill: none !important;
+  stroke: rgba(60, 60, 67, 0.12) !important;
+  stroke-width: 3 !important;
+}
+
+.ait-badge-progress {
+  fill: none !important;
+  stroke: var(--ait-ring-color, #007AFF) !important;
+  stroke-width: 3 !important;
+  stroke-linecap: round !important;
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 0.3s ease !important;
+}
+
+/* Center icon container */
+.ait-badge-icon {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--ait-icon-color, #007AFF) !important;
+  transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ait-badge-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  display: block !important;
+}
+
+/* States */
+.ait-badge-working {
+  --ait-ring-color: #007AFF;
+  --ait-icon-color: #007AFF;
+}
+
+.ait-badge-working .ait-badge-icon {
+  animation: ait-icon-pulse 1.6s ease-in-out infinite !important;
+}
+
+.ait-badge-done {
+  --ait-ring-color: #34C759;
+  --ait-icon-color: #34C759;
+}
+
+.ait-badge-done .ait-badge-icon {
+  transform: scale(1.15) !important;
+}
+
+.ait-badge-done .ait-badge-progress {
+  stroke-width: 0 !important;
+}
+
+.ait-badge-done {
+  background: rgba(52, 199, 89, 0.92) !important;
+  border-color: rgba(52, 199, 89, 0.4) !important;
+}
+
+.ait-badge-done .ait-badge-icon {
+  color: #ffffff !important;
+}
+
+.ait-badge-error {
+  --ait-ring-color: #FF3B30;
+  --ait-icon-color: #FF3B30;
+  background: rgba(255, 59, 48, 0.92) !important;
+  border-color: rgba(255, 59, 48, 0.4) !important;
+}
+
+.ait-badge-error .ait-badge-progress {
+  stroke-width: 0 !important;
+}
+
+.ait-badge-error .ait-badge-icon {
+  color: #ffffff !important;
+}
+
+/* ---------- Hover tooltip showing original text (Liquid Glass light) ---------- */
+.ait-tooltip {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  max-width: min(420px, 80vw) !important;
+  max-height: 280px !important;
+  overflow: auto !important;
+  padding: 12px 14px !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: #1c1c1e !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+    "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  letter-spacing: -0.01em !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  border: 0.5px solid rgba(0, 0, 0, 0.06) !important;
+  opacity: 0 !important;
+  transform: translateY(4px) scale(0.98) !important;
+  transition: opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: none !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+
+.ait-tooltip-visible {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+.ait-tooltip::before {
+  content: "原文";
+  display: block !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: rgba(60, 60, 67, 0.5) !important;
+  margin-bottom: 4px !important;
+}
+
+/* ---------- Animations ---------- */
+@keyframes ait-badge-in {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ait-icon-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.92);
+  }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  .ait-badge,
+  .ait-tooltip {
+    animation: none !important;
+    transition: none !important;
+  }
+}
