@@ -1,0 +1,397 @@
+/* popup.css - iOS 26 light mode, 1:1 replica of iOS Settings aesthetic. */
+
+:root {
+  /* iOS system colors (light) */
+  --system-background: #F2F2F7;
+  --system-secondary-background: #FFFFFF;
+  --system-tertiary-background: #FFFFFF;
+  --system-grouped-background: #F2F2F7;
+  --system-separator: rgba(60, 60, 67, 0.12);
+  --system-separator-opaque: #C6C6C8;
+
+  --label: #000000;
+  --label-secondary: rgba(60, 60, 67, 0.60);
+  --label-tertiary: rgba(60, 60, 67, 0.30);
+  --label-quaternary: rgba(60, 60, 67, 0.18);
+
+  --system-blue: #007AFF;
+  --system-green: #34C759;
+  --system-gray: #8E8E93;
+  --system-gray-2: #E9E9EB;
+  --system-gray-3: #D1D1D6;
+  --system-red: #FF3B30;
+  --system-orange: #FF9500;
+
+  /* Liquid glass elevation */
+  --glass-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --glass-shadow-inset: inset 0 0.5px 0 rgba(255, 255, 255, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 320px;
+  background: var(--system-background);
+  color: var(--label);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 17px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- App container ---------- */
+.app {
+  min-height: 100vh;
+  background: var(--system-background);
+}
+
+/* ---------- Large title bar (iOS 26 style) ---------- */
+.title-bar {
+  padding: 16px 20px 6px;
+  background: var(--system-background);
+}
+
+.title-bar h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--label);
+}
+
+/* ---------- Content ---------- */
+.content {
+  padding: 12px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------- Status pill (Liquid Glass) ---------- */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(142, 142, 147, 0.12);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  border: 0.5px solid rgba(60, 60, 67, 0.08);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.status-pill.active {
+  background: rgba(52, 199, 89, 0.14);
+  color: #1d7a3a;
+  border-color: rgba(52, 199, 89, 0.2);
+}
+
+.status-pill.working {
+  background: rgba(0, 122, 255, 0.12);
+  color: #0040a0;
+  border-color: rgba(0, 122, 255, 0.2);
+}
+
+.status-pill.error {
+  background: rgba(255, 59, 48, 0.12);
+  color: #b3261e;
+  border-color: rgba(255, 59, 48, 0.2);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--system-gray);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.status-pill.active .status-dot {
+  background: var(--system-green);
+  box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2);
+}
+
+.status-pill.working .status-dot {
+  background: var(--system-blue);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.status-pill.error .status-dot {
+  background: var(--system-red);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* ---------- Manual translate page button ---------- */
+.page-btn-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  padding: 13px 16px;
+  border-radius: 14px;
+  border: none;
+  background: var(--system-blue);
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.28);
+}
+
+.page-btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 122, 255, 0.36);
+}
+
+.page-btn:active {
+  transform: translateY(0) scale(0.98);
+  filter: brightness(0.95);
+}
+
+.page-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.page-btn-icon svg {
+  width: 19px;
+  height: 19px;
+  display: block;
+}
+
+.page-btn-label {
+  line-height: 1;
+}
+
+/* Translating state (working) */
+.page-btn.working {
+  background: var(--system-orange);
+  box-shadow: 0 4px 14px rgba(255, 149, 0, 0.28);
+  pointer-events: none;
+}
+
+/* Already translated state -> becomes "restore" button */
+.page-btn.translated {
+  background: var(--system-gray-3);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.page-btn.translated .page-btn-icon svg {
+  stroke-width: 2.6;
+}
+
+/* Secondary icon button (refresh) */
+.icon-page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  border: 0.5px solid rgba(60, 60, 67, 0.12);
+  background: var(--system-secondary-background);
+  color: var(--system-blue);
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--glass-shadow);
+}
+
+.icon-page-btn:hover {
+  background: rgba(0, 122, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.icon-page-btn:active {
+  transform: translateY(0) scale(0.96);
+  background: rgba(0, 122, 255, 0.12);
+}
+
+.icon-page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.icon-page-btn svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* ---------- Grouped card (iOS table view) ---------- */
+.card-group {
+  background: var(--system-secondary-background);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--glass-shadow);
+  border: 0.5px solid rgba(60, 60, 67, 0.06);
+}
+
+/* ---------- Row ---------- */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 50px;
+  padding: 9px 16px;
+  background: var(--system-secondary-background);
+  transition: background 0.15s ease;
+  cursor: default;
+}
+
+.row-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.row-link:active {
+  background: rgba(60, 60, 67, 0.08);
+}
+
+.row-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.row-title {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--label);
+  letter-spacing: -0.02em;
+}
+
+.row-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--label-secondary);
+  letter-spacing: -0.01em;
+}
+
+.row-accessory {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.accessory-text {
+  font-size: 15px;
+  color: var(--label-tertiary);
+  font-weight: 400;
+}
+
+.accessory-text.configured {
+  color: var(--system-green);
+}
+
+/* ---------- iOS chevron ---------- */
+.chevron {
+  width: 9px;
+  height: 16px;
+  position: relative;
+  flex-shrink: 0;
+  opacity: 0.35;
+}
+
+.chevron::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--label);
+  border-bottom: 2px solid var(--label);
+  transform: translate(-55%, -50%) rotate(-45deg);
+}
+
+/* ---------- Separator (iOS inset style) ---------- */
+.separator {
+  height: 0.5px;
+  background: var(--system-separator);
+  margin-left: 16px;
+}
+
+/* ---------- iOS Toggle Switch (Liquid Glass) ---------- */
+.toggle {
+  position: relative;
+  width: 51px;
+  height: 31px;
+  border-radius: 31px;
+  background: var(--system-gray-2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.06),
+    0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.toggle.on {
+  background: var(--system-green);
+}
+
+.toggle.on::after {
+  transform: translateX(20px);
+}
+
+.toggle:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.35);
+}
+
+.toggle:active::after {
+  width: 32px;
+}
+
+.toggle.on:active::after {
+  transform: translateX(15px);
+}
