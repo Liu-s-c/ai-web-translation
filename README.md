@@ -1,15 +1,15 @@
 # AI 网页翻译
 
-> iOS 26 风格 · DeepSeek V4 Flash 极速翻译 · 自动识别英文网页
+> 流式极速翻译 · 自动识别英文网页
 
-一款专注于**英文网页 → 简体中文**翻译的 Chrome / Edge 扩展,采用 iOS 26 Liquid Glass 视觉风格,基于 DeepSeek V4 Flash 流式 API 实现低延迟、高质量的整页翻译。
+一款专注于**英文网页 → 简体中文**翻译的 Chrome / Edge 扩展,支持流式翻译与段落级原文对照。
 
 ---
 
 ## ✨ 功能特性
 
 - **自动识别英文网页** —— 开启「自动翻译」后,访问英文站点自动翻译为简体中文,中文页面保持原样。
-- **流式翻译** —— 基于 DeepSeek V4 Flash 的流式响应,边请求边渲染,首字延迟极低。
+- **流式翻译** —— 边请求边渲染,首字延迟极低。
 - **段落级对照** —— 原文以 `WeakMap` 保存,译文与原文按段落对应,可一键恢复。
 - **悬停查看原文** —— 鼠标悬停在译文上即可弹出原文气泡,翻译阅读两不误。
 - **手动翻译 / 重新翻译** —— 一键翻译当前页;刷新按钮可强制重译(先恢复原文再重新翻译)。
@@ -17,7 +17,7 @@
 - **白名单** —— 添加域名后,该站点及其子域名不自动翻译(手动翻译仍可用)。
 - **智能跳过代码块** —— 默认跳过 `<code>` `<pre>` 等代码区域,不破坏技术文档。
 - **本地缓存** —— 翻译结果缓存在本地,重复访问同一页面秒开。
-- **iOS 26 设计语言** —— 玻璃拟态导航栏、原生开关、毛玻璃 Toast,视觉与系统设置一致。
+- **精致 UI** —— 毛玻璃导航栏、原生开关、流畅动画,视觉与系统设置一致。
 
 ## 📦 安装方法
 
@@ -38,8 +38,8 @@
 
 ## 🔑 配置 API Key
 
-1. 前往 [DeepSeek 平台](https://platform.deepseek.com/api_keys) 创建并复制 API Key。
-2. 点击扩展图标 → 「**设置**」→ 在 **DeepSeek API Key** 输入框粘贴 `sk-...`。
+1. 前往 API 平台创建并复制 API Key。
+2. 点击扩展图标 → 「**设置**」→ 在 **API Key** 输入框粘贴 Key。
 3. 设置会自动保存,立即生效。
 
 ## 🚀 使用说明
@@ -66,11 +66,10 @@
 | 模块 | 技术 |
 | --- | --- |
 | 扩展规范 | Manifest V3 |
-| 翻译引擎 | DeepSeek V4 Flash(`deepseek-v4-flash`)流式 API |
+| 翻译引擎 | 大语言模型流式 API |
 | Service Worker | `background.js` —— 消息路由、API 调用、缓存管理 |
 | Content Script | `content.js` —— DOM 文本节点抽取、批量翻译、SPA 路由监听 |
-| UI | 原生 HTML + CSS,无任何框架依赖 |
-| 设计语言 | iOS 26 Liquid Glass(玻璃拟态) |
+| UI | 原生 HTML + CSS,无任何框架依赖,毛玻璃风格 |
 
 ## 📁 目录结构
 
@@ -81,10 +80,10 @@ ai-web-translation/
 ├── content.js           # 内容脚本:DOM 抽取与翻译逻辑
 ├── content.css          # 翻译徽章与原文气泡样式
 ├── popup.html           # 工具栏弹窗结构
-├── popup.css            # 弹窗样式(iOS 26 风格)
+├── popup.css            # 弹窗样式
 ├── popup.js             # 弹窗交互逻辑
 ├── options.html         # 设置页结构
-├── options.css          # 设置页样式(iOS 26 风格)
+├── options.css          # 设置页样式
 ├── options.js           # 设置页交互逻辑
 └── README.md            # 项目说明
 ```
@@ -92,7 +91,7 @@ ai-web-translation/
 ## ⚙️ 工作原理简述
 
 1. **文本抽取**:`content.js` 遍历 DOM,跳过 `<script>` `<style>` `<code>` 等节点,收集可翻译的文本节点。
-2. **批量请求**:文本按段落聚合为批次(每批 ≤ 40 段或 ≤ 5000 字符),由 `background.js` 调用 DeepSeek 流式 API。
+2. **批量请求**:文本按段落聚合为批次(每批 ≤ 40 段或 ≤ 5000 字符),由 `background.js` 调用流式 API。
 3. **增量解析**:Service Worker 边接收流式响应边解析 JSON 键值对,通过 `chrome.runtime.Port` 增量回传给内容脚本。
 4. **DOM 回写**:内容脚本按段落顺序回写译文,原文存入 `WeakMap`,支持一键恢复。
 5. **缓存命中**:相同源文本命中本地缓存时跳过 API 调用,显著降低延迟与成本。
@@ -101,13 +100,9 @@ ai-web-translation/
 ## 🔒 隐私说明
 
 - API Key 仅存储在本地 `chrome.storage.local`,不会上传到任何第三方服务器。
-- 翻译内容通过 HTTPS 直连 DeepSeek 官方 API(`api.deepseek.com`),扩展本身不经过任何中间代理。
+- 翻译内容通过 HTTPS 直连 API 服务商,扩展本身不经过任何中间代理。
 - 翻译缓存仅保存在本地浏览器,可在设置页一键清空。
 
 ## 📝 许可证
 
-本项目仅供学习与个人使用。DeepSeek API 的使用需遵守 [DeepSeek 服务条款](https://platform.deepseek.com/)。
-
----
-
-AI 网页翻译 · 由 DeepSeek V4 Flash 驱动
+本项目仅供学习与个人使用。
